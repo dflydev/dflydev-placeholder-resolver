@@ -1,8 +1,9 @@
 Placeholder Resolver
 ====================
 
-Provides a mechanism to resolve placeholders from an arbitrary data
-source.
+Given a data source representing key => value pairs, resolve placeholders
+like `${foo.bar}` to the value associated with the `foo.bar` key in
+the data source.
 
 Placeholder Resolver is intended to be used at a relatively low level.
 For example, a configuration library could use Placeholder Resolver
@@ -13,19 +14,19 @@ other configuration values.
 Example
 -------
 
-    conn:
-        driver: mysql
-        db_name: example
-        hostname: 127.0.0.1
-        username: root
-        password: pa$$word
-        dsn: ${conn.driver}:dbname=${conn.db_name};host=${conn.hostname}
+    conn.driver: mysql
+    conn.db_name: example
+    conn.hostname: 127.0.0.1
+    conn.username: root
+    conn.password: pa$$word
 
 Given the appropriate `DataSourceInterface` implementation to provide
-the above data, the Placeholder Resolver would resolve the value for
-`conn.dsn` to:
+the above data as a set of key => value pairs, the Placeholder Resolver
+would resolve the value of `$dsnPattern` to `mysql:dbname=example;host=127.0.0.1`.
 
-    mysql:dbname=example;host=127.0.0.1
+    $dsnPattern = '${conn.driver}:dbname=${conn.db_name};host=${conn.hostname}';
+    $dsn = $placeholderResolver->resolveValue($dsnPattern);
+    // mysql:dbname=example;host=127.0.0.1
 
 
 Requirements
