@@ -1,7 +1,7 @@
 {
     "name": "dflydev/placeholder-resolver",
     "type": "library",
-    "description": "Given a data source of key => value pairs, resolve placeholder values from within the set",
+    "description": "Given a data source representing key => value pairs, resolve placeholders like ${foo.bar} to the value associated with the 'foo.bar' key in the data source.",
     "homepage": "https://github.com/dflydev/dflydev-placeholder-resolver",
     "keywords": ["placeholder", "resolver"],
     "license": "New BSD License",
