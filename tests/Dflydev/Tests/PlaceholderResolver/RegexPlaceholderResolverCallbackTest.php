@@ -11,13 +11,13 @@
 
 namespace Dflydev\Tests\PlaceholderResolver;
 
-use Dflydev\PlaceholderResolver\PlaceholderResolverCallback;
+use Dflydev\PlaceholderResolver\RegexPlaceholderResolverCallback;
 
-class PlaceholderResolverCallbackTest extends \PHPUnit_Framework_TestCase
+class RegexPlaceholderResolverCallbackTest extends \PHPUnit_Framework_TestCase
 {
     public function testCallback()
     {
-        $dataSource = $this->getMock('Dflydev\PlaceholderResolver\DataSourceInterface');
+        $dataSource = $this->getMock('Dflydev\PlaceholderResolver\DataSource\DataSourceInterface');
         $dataSource
             ->expects($this->any())
             ->method('exists')
@@ -41,7 +41,7 @@ class PlaceholderResolverCallbackTest extends \PHPUnit_Framework_TestCase
             )))
         ;
 
-        $placeholderResolverCallback = new PlaceholderResolverCallback($dataSource);
+        $placeholderResolverCallback = new RegexPlaceholderResolverCallback($dataSource);
 
         define('TEST_CONSTANT_RESOLVE', 'abc123');
 

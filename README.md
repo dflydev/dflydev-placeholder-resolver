@@ -17,13 +17,13 @@ Requirements
 Usage
 -----
 
-    use Dflydev\PlaceholderResolver\PlaceholderResolver;
+    use Dflydev\PlaceholderResolver\RegexPlaceholderResolver;
     
     // YourDataSource implements Dflydev\PlaceholderResolver\DataSourceInterface
     $dataSource = new YourDataSource;
 
     // Create the placeholder resolver
-    $placeholderResolver = new PlaceholderResolver($dataSource);
+    $placeholderResolver = new RegexPlaceholderResolver($dataSource);
 
     // Start resolving placeholders
     $value = $placeholderResolver->resolvePlaceholder('${foo}');
@@ -35,7 +35,7 @@ prefix is `${` and the default placeholder suffix is `}`.
 To handle placeholders that look like `<foo.bar>` instead of `${foo.bar}`,
 one would instantiate the class like this:
 
-    $placeholderResolver = new PlaceholderResolver($dataSource, '<', '>');
+    $placeholderResolver = new RegexPlaceholderResolver($dataSource, '<', '>');
 
 Placeholders can recursively resolve placeholders. For example, given a
 data source with the following:

@@ -11,7 +11,9 @@
 
 namespace Dflydev\PlaceholderResolver;
 
-class PlaceholderResolverCallback
+use Dflydev\PlaceholderResolver\DataSource\DataSourceInterface;
+
+class RegexPlaceholderResolverCallback
 {
     /**
      * @var DataSourceInterface
