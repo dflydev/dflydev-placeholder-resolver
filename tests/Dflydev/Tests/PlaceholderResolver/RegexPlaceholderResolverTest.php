@@ -11,13 +11,13 @@
 
 namespace Dflydev\Tests\PlaceholderResolver;
 
-use Dflydev\PlaceholderResolver\PlaceholderResolver;
+use Dflydev\PlaceholderResolver\RegexPlaceholderResolver;
 
 class PlaceholderResolverTest extends \PHPUnit_Framework_TestCase
 {
     public function testResolvePlaceholder()
     {
-        $dataSource = $this->getMock('Dflydev\PlaceholderResolver\DataSourceInterface');
+        $dataSource = $this->getMock('Dflydev\PlaceholderResolver\DataSource\DataSourceInterface');
         $dataSource
             ->expects($this->any())
             ->method('exists')
@@ -42,7 +42,7 @@ class PlaceholderResolverTest extends \PHPUnit_Framework_TestCase
             )))
         ;
 
-        $placeholderResolver = new PlaceholderResolver($dataSource);
+        $placeholderResolver = new RegexPlaceholderResolver($dataSource);
 
         $this->assertEquals("FOO", $placeholderResolver->resolvePlaceholder('${foo}'));
         $this->assertEquals("BAR", $placeholderResolver->resolvePlaceholder('${bar}'));
@@ -57,7 +57,7 @@ class PlaceholderResolverTest extends \PHPUnit_Framework_TestCase
      */
     public function testResolvePlaceholderPrefixAndSuffix($prefix, $suffix)
     {
-        $dataSource = $this->getMock('Dflydev\PlaceholderResolver\DataSourceInterface');
+        $dataSource = $this->getMock('Dflydev\PlaceholderResolver\DataSource\DataSourceInterface');
         $dataSource
             ->expects($this->any())
             ->method('exists')
@@ -82,7 +82,7 @@ class PlaceholderResolverTest extends \PHPUnit_Framework_TestCase
             )))
         ;
 
-        $placeholderResolver = new PlaceholderResolver($dataSource, $prefix, $suffix);
+        $placeholderResolver = new RegexPlaceholderResolver($dataSource, $prefix, $suffix);
         $this->assertEquals("FOO", $placeholderResolver->resolvePlaceholder($prefix.'foo'.$suffix));
         $this->assertEquals($prefix.'bat'.$suffix, $placeholderResolver->resolvePlaceholder($prefix.'bat'.$suffix));
         $this->assertEquals("FOO-BAR", $placeholderResolver->resolvePlaceholder($prefix.'composite'.$suffix));

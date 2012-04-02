@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Dflydev\PlaceholderResolver;
+namespace Dflydev\PlaceholderResolver\DataSource;
 
 interface DataSourceInterface
 {

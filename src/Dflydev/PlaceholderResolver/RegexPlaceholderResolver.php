@@ -11,7 +11,9 @@
 
 namespace Dflydev\PlaceholderResolver;
 
-class PlaceholderResolver implements PlaceholderResolverInterface
+use Dflydev\PlaceholderResolver\DataSource\DataSourceInterface;
+
+class RegexPlaceholderResolver extends AbstractPlaceholderResolver
 {
     /**
      * @var PlaceholderResolverCallback
@@ -24,11 +26,6 @@ class PlaceholderResolver implements PlaceholderResolverInterface
     private $pattern;
 
     /**
-     * Cache of resolved placeholders
-     */
-    private $resolved = array();
-
-    /**
      * Constructor
      * 
      * @param DataSourceInterface $dataSource
@@ -37,7 +34,7 @@ class PlaceholderResolver implements PlaceholderResolverInterface
      */
     public function __construct(DataSourceInterface $dataSource, $placeholderPrefix = '${', $placeholderSuffix = '}')
     {
-        $this->placeholderResolverCallback = new PlaceholderResolverCallback($dataSource);
+        $this->placeholderResolverCallback = new RegexPlaceholderResolverCallback($dataSource);
         $placeholderPrefix = preg_quote($placeholderPrefix);
         $placeholderSuffix = preg_quote($placeholderSuffix);
         $this->pattern = "/{$placeholderPrefix}([a-zA-Z0-9\.\(\)_\:]+?){$placeholderSuffix}/";
@@ -48,15 +45,14 @@ class PlaceholderResolver implements PlaceholderResolverInterface
      */
     public function resolvePlaceholder($placeholder)
     {
-        if (array_key_exists($placeholder, $this->resolved)) {
-            print " [returning previously resolved value for $placeholder as ".$this->resolved[$placeholder]. "]\n";
-            return $this->resolved[$placeholder];
+        if ($this->getCache()->exists($placeholder)) {
+            return $this->getCache()->get($placeholder);
         }
 
         $value = $placeholder;
         $counter = 0;
 
-        while ($counter++ < 10) {
+        while ($counter++ < $this->maxReplacementDepth) {
             $newValue = preg_replace_callback(
                 $this->pattern,
                 array($this->placeholderResolverCallback, 'callback'),
@@ -66,6 +62,8 @@ class PlaceholderResolver implements PlaceholderResolverInterface
             $value = $newValue;
         }
 
-        return $this->resolved[$placeholder] = $value;;
+        $this->getCache()->set($placeholder, $value);
+
+        return $value;
     }
 }
