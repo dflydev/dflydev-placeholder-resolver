@@ -19,7 +19,7 @@ Usage
 
     use Dflydev\PlaceholderResolver\RegexPlaceholderResolver;
     
-    // YourDataSource implements Dflydev\PlaceholderResolver\DataSourceInterface
+    // YourDataSource implements Dflydev\PlaceholderResolver\DataSource\DataSourceInterface
     $dataSource = new YourDataSource;
 
     // Create the placeholder resolver
@@ -28,7 +28,7 @@ Usage
     // Start resolving placeholders
     $value = $placeholderResolver->resolvePlaceholder('${foo}');
 
-The `PlaceholderResolver` constructor accepts two additional arguments,
+The `RegexPlaceholderResolver` constructor accepts two additional arguments,
 a placeholder prefix and a placeholder suffix. The default placeholder
 prefix is `${` and the default placeholder suffix is `}`.
 
@@ -48,6 +48,15 @@ data source with the following:
 
 The placeholder `${${foo}.${bar}}` would internally be resolved to
 `${FOO.BAR}` before being further resolved to `BAZ!`.
+
+Resolved placeholders are cached using the `CacheInterface`. The default
+`Cache` implementation is used unless it is explicitly set on the
+Placeholder Resolver.
+
+    // YourCache implements Dflydev\PlaceholderResolver\Cache\CacheInterface
+    $cache = new YourCache;
+    
+    $placeholderResolver->setCache($cache);
 
 
 License
