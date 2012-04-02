@@ -6,7 +6,27 @@ source.
 
 Placeholder Resolver is intended to be used at a relatively low level.
 For example, a configuration library could use Placeholder Resolver
-behind the scenes.
+behind the scenes to allow for configuration values to reference
+other configuration values.
+
+
+Example
+-------
+
+    conn:
+        driver: mysql
+        db_name: example
+        hostname: 127.0.0.1
+        username: root
+        password: pa$$word
+        dsn: ${conn.driver}:dbname=${conn.db_name};host=${conn.hostname}
+
+Given the appropriate `DataSourceInterface` implementation to provide
+the above data, the Placeholder Resolver would resolve the value for
+`conn.dsn` to:
+
+    mysql:dbname=example;host=127.0.0.1
+
 
 Requirements
 ------------
