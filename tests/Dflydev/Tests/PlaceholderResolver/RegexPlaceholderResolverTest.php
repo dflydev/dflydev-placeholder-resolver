@@ -28,6 +28,7 @@ class PlaceholderResolverTest extends \PHPUnit_Framework_TestCase
                 array('bat', false, false),
                 array('composite', false, true),
                 array('FOO.BAR', false, true),
+                array('FOO.BAR.BAZ', false, false),
             )))
         ;
         $dataSource
@@ -50,6 +51,7 @@ class PlaceholderResolverTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("FOO-BAR", $placeholderResolver->resolvePlaceholder('${composite}'));
         $this->assertEquals("FOO-BAR-BAZ", $placeholderResolver->resolvePlaceholder('${composite}-${baz}'));
         $this->assertEquals("Foo Dot Bar", $placeholderResolver->resolvePlaceholder('${${foo}.${bar}}'));
+        $this->assertEquals('${FOO.BAR.BAZ}', $placeholderResolver->resolvePlaceholder('${FOO.BAR.BAZ}'));
     }
 
     /**
