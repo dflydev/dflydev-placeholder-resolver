@@ -17,20 +17,17 @@ class CacheTest extends \PHPUnit_Framework_TestCase
 {
     public function testSetAndGet()
     {
-        $array = array();
         $object = new CacheTestToSTring;
 
         $cache = new Cache;
         $cache->set(1, "one as integer");
         $cache->set("2", "two as string '2'");
         $cache->set("three", "three as string");
-        $cache->set($array, "array");
         $cache->set($object, "object");
 
         $this->assertEquals("one as integer", $cache->get(1));
         $this->assertEquals("two as string '2'", $cache->get('2'));
         $this->assertEquals("three as string", $cache->get('three'));
-        $this->assertEquals("array", $cache->get($array));
         $this->assertEquals("object", $cache->get($object));
 
         $this->assertNull($cache->get(11));
@@ -40,7 +37,6 @@ class CacheTest extends \PHPUnit_Framework_TestCase
 
     public function testExists()
     {
-        $array = array();
         $object = new CacheTestToSTring;
 
         $cache = new Cache;
@@ -48,9 +44,78 @@ class CacheTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($cache->exists(1));
         $this->assertFalse($cache->exists("2"));
         $this->assertFalse($cache->exists("three"));
-        $this->assertFalse($cache->exists($array));
         $this->assertFalse($cache->exists($object));
     }
+
+    public function testExistsArray()
+    {
+        $array = array();
+
+        $cache = new Cache;
+
+        $this->setExpectedException('RuntimeException');
+
+        $cache->exists($array);
+    }
+
+    public function testGetArray()
+    {
+        $array = array();
+
+        $cache = new Cache;
+
+        $this->setExpectedException('RuntimeException');
+
+        $cache->get($array);
+    }
+
+    public function testSetArray()
+    {
+        $array = array();
+
+        $cache = new Cache;
+
+        $this->setExpectedException('RuntimeException');
+
+        $cache->set($array, 'broken');
+    }
+
+    public function testExistsNoToString()
+    {
+        $object = new CacheTestNoToSTring;
+
+        $cache = new Cache;
+
+        $this->setExpectedException('PHPUnit_Framework_Error');
+
+        $cache->exists($object);
+    }
+
+    public function testGetNoToString()
+    {
+        $object = new CacheTestNoToSTring;
+
+        $cache = new Cache;
+
+        $this->setExpectedException('PHPUnit_Framework_Error');
+
+        $cache->get($object);
+    }
+
+    public function testSetNoToString()
+    {
+        $object = new CacheTestNoToSTring;
+
+        $cache = new Cache;
+
+        $this->setExpectedException('PHPUnit_Framework_Error');
+
+        $cache->set($object, 'broken');
+    }
+}
+
+class CacheTestNoToSTring
+{
 }
 
 class CacheTestToSTring

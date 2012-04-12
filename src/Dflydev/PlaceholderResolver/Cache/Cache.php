@@ -20,6 +20,9 @@ class Cache implements CacheInterface
      */
     public function exists($placeholder)
     {
+        if (is_array($placeholder)) {
+            throw new \RuntimeException('Placeholder is an array');
+        }
         return array_key_exists((string) $placeholder, $this->cache);
     }
 
@@ -28,6 +31,9 @@ class Cache implements CacheInterface
      */
     public function get($placeholder)
     {
+        if (is_array($placeholder)) {
+            throw new \RuntimeException('Placeholder is an array');
+        }
         return array_key_exists((string) $placeholder, $this->cache)
             ? $this->cache[(string) $placeholder]
             : null;
@@ -38,6 +44,9 @@ class Cache implements CacheInterface
      */
     public function set($placeholder, $value = null)
     {
+        if (is_array($placeholder)) {
+            throw new \RuntimeException('Placeholder is an array');
+        }
         $this->cache[(string) $placeholder] = $value;
     }
 
