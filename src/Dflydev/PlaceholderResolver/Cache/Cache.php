@@ -20,7 +20,7 @@ class Cache implements CacheInterface
      */
     public function exists($placeholder)
     {
-        return array_key_exists($placeholder, $this->cache);
+        return array_key_exists((string) $placeholder, $this->cache);
     }
 
     /**
@@ -28,8 +28,8 @@ class Cache implements CacheInterface
      */
     public function get($placeholder)
     {
-        return array_key_exists($placeholder, $this->cache)
-            ? $this->cache[$placeholder]
+        return array_key_exists((string) $placeholder, $this->cache)
+            ? $this->cache[(string) $placeholder]
             : null;
     }
 
@@ -38,7 +38,7 @@ class Cache implements CacheInterface
      */
     public function set($placeholder, $value = null)
     {
-        $this->cache[$placeholder] = $value;
+        $this->cache[(string) $placeholder] = $value;
     }
 
     /**
