@@ -2,7 +2,7 @@
 
 /*
  * This file is a part of dflydev/placeholder-resolver.
- * 
+ *
  * (c) Dragonfly Development Inc.
  *
  * For the full copyright and license information, please view the LICENSE
@@ -27,10 +27,10 @@ class RegexPlaceholderResolver extends AbstractPlaceholderResolver
 
     /**
      * Constructor
-     * 
+     *
      * @param DataSourceInterface $dataSource
-     * @param string|null $placeholderPrefix
-     * @param string|null $placeholderSuffix
+     * @param string|null         $placeholderPrefix
+     * @param string|null         $placeholderSuffix
      */
     public function __construct(DataSourceInterface $dataSource, $placeholderPrefix = '${', $placeholderSuffix = '}')
     {

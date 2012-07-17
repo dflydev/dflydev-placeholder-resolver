@@ -2,7 +2,7 @@
 
 /*
  * This file is a part of dflydev/placeholder-resolver.
- * 
+ *
  * (c) Dragonfly Development Inc.
  *
  * For the full copyright and license information, please view the LICENSE
@@ -21,8 +21,9 @@ abstract class AbstractPlaceholderResolver implements PlaceholderResolverInterfa
 
     /**
      * Set maximum depth for recursive replacement
-     * 
+     *
      * @param int $maxReplacementDepth
+     *
      * @return PlaceholderResolver
      */
     public function setMaxReplacementDepth($maxReplacementDepth)
@@ -34,7 +35,7 @@ abstract class AbstractPlaceholderResolver implements PlaceholderResolverInterfa
 
     /**
      * Get cache
-     * 
+     *
      * @return CacheInterface
      */
     public function getCache()
@@ -48,7 +49,7 @@ abstract class AbstractPlaceholderResolver implements PlaceholderResolverInterfa
 
     /**
      * Set cache
-     * 
+     *
      * @param CacheInterface $cache
      */
     public function setCache(CacheInterface $cache)

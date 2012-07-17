@@ -2,7 +2,7 @@
 
 /*
  * This file is a part of dflydev/placeholder-resolver.
- * 
+ *
  * (c) Dragonfly Development Inc.
  *
  * For the full copyright and license information, please view the LICENSE
@@ -23,6 +23,7 @@ class Cache implements CacheInterface
         if (is_array($placeholder)) {
             throw new \RuntimeException('Placeholder is an array');
         }
+
         return array_key_exists((string) $placeholder, $this->cache);
     }
 
@@ -34,6 +35,7 @@ class Cache implements CacheInterface
         if (is_array($placeholder)) {
             throw new \RuntimeException('Placeholder is an array');
         }
+
         return array_key_exists((string) $placeholder, $this->cache)
             ? $this->cache[(string) $placeholder]
             : null;
