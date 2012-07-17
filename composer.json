@@ -4,7 +4,7 @@
     "description": "Given a data source representing key => value pairs, resolve placeholders like ${foo.bar} to the value associated with the 'foo.bar' key in the data source.",
     "homepage": "https://github.com/dflydev/dflydev-placeholder-resolver",
     "keywords": ["placeholder", "resolver"],
-    "license": "New BSD License",
+    "license": "MIT",
     "authors": [
         {
             "name": "Dragonfly Development Inc.",
