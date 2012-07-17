@@ -9,9 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Dflydev\Tests\PlaceholderResolver;
-
-use Dflydev\PlaceholderResolver\RegexPlaceholderResolverCallback;
+namespace Dflydev\PlaceholderResolver;
 
 class RegexPlaceholderResolverCallbackTest extends \PHPUnit_Framework_TestCase
 {

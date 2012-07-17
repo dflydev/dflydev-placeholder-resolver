@@ -9,9 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Dflydev\Tests\PlaceholderResolver\Cache;
-
-use Dflydev\PlaceholderResolver\Cache\Cache;
+namespace Dflydev\PlaceholderResolver\Cache;
 
 class CacheTest extends \PHPUnit_Framework_TestCase
 {

@@ -2,7 +2,7 @@
 <phpunit colors="true" bootstrap="tests/bootstrap.php">
     <testsuites>
         <testsuite name="Placeholder Resolver Test Suite">
-            <directory>./tests/Dflydev/Tests/PlaceholderResolver</directory>
+            <directory>./tests/Dflydev/PlaceholderResolver</directory>
         </testsuite>
     </testsuites>
 

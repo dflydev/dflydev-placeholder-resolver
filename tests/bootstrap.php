@@ -9,5 +9,5 @@
  * file that was distributed with this source code.
  */
 
-$loader = require dirname(__DIR__).'/vendor/.composer/autoload.php';
-$loader->add('Dflydev\\Tests\\PlaceholderResolver', 'tests');
+$loader = require dirname(__DIR__).'/vendor/autoload.php';
+$loader->add('Dflydev\\PlaceholderResolver', 'tests');
