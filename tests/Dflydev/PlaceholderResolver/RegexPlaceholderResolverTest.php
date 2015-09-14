@@ -98,4 +98,38 @@ class PlaceholderResolverTest extends \PHPUnit_Framework_TestCase
             array('(<)', '(>)'),
         );
     }
+
+    public function testResolvePlaceholderReturnType()
+    {
+        $dataSource = $this->getMock('Dflydev\PlaceholderResolver\DataSource\DataSourceInterface');
+        $dataSource
+            ->expects($this->any())
+            ->method('exists')
+            ->will($this->returnValueMap(array(
+                array('true', false, true),
+                array('int', false, true),
+                array('composite', false, true),
+            )))
+        ;
+        $dataSource
+            ->expects($this->any())
+            ->method('get')
+            ->will($this->returnValueMap(array(
+                array('true', false, true),
+                array('int', false, 2015),
+                array('composite', false, '${int}'),
+            )))
+        ;
+
+        $placeholderResolver = new RegexPlaceholderResolver($dataSource);
+
+        $this->assertSame(true, $placeholderResolver->resolvePlaceholder(true));
+        $this->assertSame(false, $placeholderResolver->resolvePlaceholder(false));
+        $this->assertSame(2015, $placeholderResolver->resolvePlaceholder(2015));
+        $this->assertSame(2015.0914, $placeholderResolver->resolvePlaceholder(2015.0914));
+        $this->assertSame('2015', $placeholderResolver->resolvePlaceholder('2015'));
+        $this->assertSame('2015', $placeholderResolver->resolvePlaceholder('${int}'));
+        $this->assertSame('1', $placeholderResolver->resolvePlaceholder('${true}'));
+        $this->assertSame('2015', $placeholderResolver->resolvePlaceholder('${composite}'));
+    }
 }

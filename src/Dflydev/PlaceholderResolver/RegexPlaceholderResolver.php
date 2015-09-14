@@ -45,6 +45,10 @@ class RegexPlaceholderResolver extends AbstractPlaceholderResolver
      */
     public function resolvePlaceholder($placeholder)
     {
+        if (!is_string($placeholder)) {
+            return $placeholder;
+        }
+
         if ($this->getCache()->exists($placeholder)) {
             return $this->getCache()->get($placeholder);
         }
