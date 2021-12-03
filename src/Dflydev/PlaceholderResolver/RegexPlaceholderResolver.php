@@ -56,7 +56,7 @@ class RegexPlaceholderResolver extends AbstractPlaceholderResolver
             $newValue = preg_replace_callback(
                 $this->pattern,
                 array($this->placeholderResolverCallback, 'callback'),
-                $value
+                (string)$value
             );
             if ($newValue === $value) { break; }
             $value = $newValue;
